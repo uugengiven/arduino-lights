@@ -164,17 +164,17 @@ void loop() {
 frameRateGauge();
       break;
 
-    case 7:
+    //case 7:
       //electricity bursts
 			//uint8_t width, float prob,
 			//uint8_t R,     uint8_t G,     uint8_t B,
 			//float   Rdecay, float  Gdecay, float Bdecay)
-			bursts(7,  20,
-						255,  255,  255,
-						.82,  .83,  .85);
+//			bursts(7,  20,
+//						255,  255,  255,
+//						.82,  .83,  .85);
 						
 						
-						break;
+	//					break;
 
     case 8:
       //movie
@@ -296,125 +296,125 @@ void chase(uint8_t wait) {
 void cloudSlider(uint8_t wait) {
 
 }
-void bursts(uint8_t width, float prob,
-						uint8_t R,     uint8_t G,     uint8_t B,
-						float   Rdecay, float  Gdecay, float Bdecay){
-						
-		for (int j=1;j<strip.numPixels()-1;j++) {
-    thisColor=strip.getPixelColor(j);
-			rippleBuffer2[j][0]*=Rdecay;
-			rippleBuffer2[j][1]*=Gdecay;
-			rippleBuffer2[j][2]*=Bdecay;
-		}
-
-						
-	  if (random(100)<prob) {
-			int pos=random(strip.numPixels()-2-width-width)+1+width;
-
-			for(int i=(pos-width); i<(pos+width); i++) {
-				rippleBuffer2[i][0]+=R;
-				rippleBuffer2[i][1]+=G;
-				rippleBuffer2[i][2]+=B;
-			}
-		
-		}
-			for (int j=0;j<strip.numPixels();j++) {
-			strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]),
-																				 clamp(rippleBuffer2[j][1]),
-																				 clamp(rippleBuffer2[j][2])));
-		}
-
-		
-
-	}
-						
-void ripple(uint8_t brite, 
-            float decay, float prob,
-            float mulR, float offR,
-            float mulG, float offG,
-            float mulB, float offB
-             ) {
-      if (random(100)<prob) {
-    //int col=128;//random(128);
-    int pos=random(strip.numPixels()-2)+1;
-    rippleBuffer2[pos][0]+=brite;
-    rippleBuffer2[pos][1]+=brite;
-    rippleBuffer2[pos][2]+=brite;
-    
-  }
-  for (int j=1;j<strip.numPixels()-1;j++) {
-
-    for (int k=0; k<3;k++) {
-    rippleBuffer2[j][k] = (rippleBuffer1[j-1][k]+
-                        rippleBuffer1[j+1][k])
-                        -rippleBuffer2[j][k]
-                        ;
-    rippleBuffer2[j][k] =rippleBuffer2[j][k] * decay;  
-  }    
-  }
-  rippleBuffer2[0][0]=0;rippleBuffer2[0][1]=0;rippleBuffer2[0][2]=0;
-  rippleBuffer2[strip.numPixels()][0]=0;
-  rippleBuffer2[strip.numPixels()][1]=0;
-  rippleBuffer2[strip.numPixels()][2]=0;
-  for (int j=0;j<strip.numPixels();j++) {
-    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
-                                       clamp(rippleBuffer2[j][1]*mulG+offG),
-                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
-   for (int k=0; k<3;k++) {                                    
-   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
-   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
-   rippleBuffer1[j][k]=rippleBufferSwap[k];
-   }   
-  }
-  //strip.show();
-  //delay(wait);
-
-}
-
-void rainbowRipple(uint8_t brite, 
-            float decay, float prob,
-            float mulR, float offR,
-            float mulG, float offG,
-            float mulB, float offB
-             ) {
-      if (random(100)<prob) {
-    //int col=128;//random(128);
-    int pos=random(strip.numPixels()-2)+1;
-    int wheelcolor=Wheel(random(255));
-    rippleBuffer2[pos][0]+=wheelcolor>>16 & 0xff;
-    rippleBuffer2[pos][1]+=wheelcolor>>8  & 0xff;
-    rippleBuffer2[pos][2]+=wheelcolor & 0xff;
-
-    
-  }
-  for (int j=1;j<strip.numPixels()-1;j++) {
-
-    for (int k=0; k<3;k++) {
-    rippleBuffer2[j][k] = (rippleBuffer1[j-1][k]+
-                        rippleBuffer1[j+1][k])
-                        -rippleBuffer2[j][k]
-                        ;
-    rippleBuffer2[j][k] =rippleBuffer2[j][k] * decay;  
-  }    
-  }
-  rippleBuffer2[0][0]=0;rippleBuffer2[0][1]=0;rippleBuffer2[0][2]=0;
-  rippleBuffer2[strip.numPixels()][0]=0;
-  rippleBuffer2[strip.numPixels()][1]=0;
-  rippleBuffer2[strip.numPixels()][2]=0;
-  for (int j=0;j<strip.numPixels();j++) {
-    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
-                                       clamp(rippleBuffer2[j][1]*mulG+offG),
-                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
-   for (int k=0; k<3;k++) {                                    
-   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
-   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
-   rippleBuffer1[j][k]=rippleBufferSwap[k];
-   }   
-  }
-  //strip.show();
-  //delay(wait);
-
-}
+//void bursts(uint8_t width, float prob,
+//						uint8_t R,     uint8_t G,     uint8_t B,
+//						float   Rdecay, float  Gdecay, float Bdecay){
+//						
+//		for (int j=1;j<strip.numPixels()-1;j++) {
+//    //var thisColor=strip.getPixelColor(j);
+//			rippleBuffer2[j][0]*=Rdecay;
+//			rippleBuffer2[j][1]*=Gdecay;
+//			rippleBuffer2[j][2]*=Bdecay;
+//		}
+//
+//						
+//	  if (random(100)<prob) {
+//			int pos=random(strip.numPixels()-2-width-width)+1+width;
+//
+//			for(int i=(pos-width); i<(pos+width); i++) {
+//				rippleBuffer2[i][0]+=R;
+//				rippleBuffer2[i][1]+=G;
+//				rippleBuffer2[i][2]+=B;
+//			}
+//		
+//		}
+//			for (int j=0;j<strip.numPixels();j++) {
+//			strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]),
+//																				 clamp(rippleBuffer2[j][1]),
+//																				 clamp(rippleBuffer2[j][2])));
+//		}
+//
+//		
+//
+//	}
+//						
+//void ripple(uint8_t brite, 
+//            float decay, float prob,
+//            float mulR, float offR,
+//            float mulG, float offG,
+//            float mulB, float offB
+//             ) {
+//      if (random(100)<prob) {
+//    //int col=128;//random(128);
+//    int pos=random(strip.numPixels()-2)+1;
+//    rippleBuffer2[pos][0]+=brite;
+//    rippleBuffer2[pos][1]+=brite;
+//    rippleBuffer2[pos][2]+=brite;
+//    
+//  }
+//  for (int j=1;j<strip.numPixels()-1;j++) {
+//
+//    for (int k=0; k<3;k++) {
+//    rippleBuffer2[j][k] = (rippleBuffer1[j-1][k]+
+//                        rippleBuffer1[j+1][k])
+//                        -rippleBuffer2[j][k]
+//                        ;
+//    rippleBuffer2[j][k] =rippleBuffer2[j][k] * decay;  
+//  }    
+//  }
+//  rippleBuffer2[0][0]=0;rippleBuffer2[0][1]=0;rippleBuffer2[0][2]=0;
+//  rippleBuffer2[strip.numPixels()][0]=0;
+//  rippleBuffer2[strip.numPixels()][1]=0;
+//  rippleBuffer2[strip.numPixels()][2]=0;
+//  for (int j=0;j<strip.numPixels();j++) {
+//    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
+//                                       clamp(rippleBuffer2[j][1]*mulG+offG),
+//                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
+//   for (int k=0; k<3;k++) {                                    
+//   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
+//   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
+//   rippleBuffer1[j][k]=rippleBufferSwap[k];
+//   }   
+//  }
+//  //strip.show();
+//  //delay(wait);
+//
+//}
+//
+//void rainbowRipple(uint8_t brite, 
+//            float decay, float prob,
+//            float mulR, float offR,
+//            float mulG, float offG,
+//            float mulB, float offB
+//             ) {
+//      if (random(100)<prob) {
+//    //int col=128;//random(128);
+//    int pos=random(strip.numPixels()-2)+1;
+//    int wheelcolor=Wheel(random(255));
+//    rippleBuffer2[pos][0]+=wheelcolor>>16 & 0xff;
+//    rippleBuffer2[pos][1]+=wheelcolor>>8  & 0xff;
+//    rippleBuffer2[pos][2]+=wheelcolor & 0xff;
+//
+//    
+//  }
+//  for (int j=1;j<strip.numPixels()-1;j++) {
+//
+//    for (int k=0; k<3;k++) {
+//    rippleBuffer2[j][k] = (rippleBuffer1[j-1][k]+
+//                        rippleBuffer1[j+1][k])
+//                        -rippleBuffer2[j][k]
+//                        ;
+//    rippleBuffer2[j][k] =rippleBuffer2[j][k] * decay;  
+//  }    
+//  }
+//  rippleBuffer2[0][0]=0;rippleBuffer2[0][1]=0;rippleBuffer2[0][2]=0;
+//  rippleBuffer2[strip.numPixels()][0]=0;
+//  rippleBuffer2[strip.numPixels()][1]=0;
+//  rippleBuffer2[strip.numPixels()][2]=0;
+//  for (int j=0;j<strip.numPixels();j++) {
+//    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
+//                                       clamp(rippleBuffer2[j][1]*mulG+offG),
+//                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
+//   for (int k=0; k<3;k++) {                                    
+//   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
+//   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
+//   rippleBuffer1[j][k]=rippleBufferSwap[k];
+//   }   
+//  }
+//  //strip.show();
+//  //delay(wait);
+//
+//}
 
 void movPlayer(uint8_t wait) {
 //      strip.setPixelColor(5,strip.Color(255,255,255));
