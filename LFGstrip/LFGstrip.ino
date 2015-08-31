@@ -195,7 +195,7 @@ frameRateGauge();
 
       break;
   }
-  //frameRateGauge();
+  frameRateGauge();
   } else {resetFlag=true;}
   //frameRateGauge();
   strip.show();
