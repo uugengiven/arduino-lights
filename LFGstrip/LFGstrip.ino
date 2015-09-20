@@ -4,6 +4,8 @@
 
 //#define LIGHT_COUNT (108)
 #define LIGHT_COUNT (960)
+
+#define FLURRY_COUNT (10)
 //#include "flowerpan.h"
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -12,7 +14,7 @@
 //   NEO_GRB     Pixels are wired for GRB bitstream
 //   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)
 //   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, 2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, 4, NEO_GRB + NEO_KHZ800);
 //flowerpan
 //frames--100
 //rgb, 108 pixels
@@ -36,6 +38,16 @@ const unsigned char cloudstrip1[] PROGMEM = {
 };
 const unsigned char cloudstrip2[] PROGMEM = {
   89, 103, 105, 87, 102, 106, 87, 102, 106, 87, 105, 106, 91, 109, 110, 92, 111, 107, 92, 111, 107, 98, 117, 109, 100, 120, 111, 101, 117, 112, 103, 120, 114, 105, 119, 114, 103, 118, 113, 107, 120, 113, 105, 117, 111, 107, 117, 109, 110, 120, 112, 114, 124, 116, 117, 127, 119, 121, 131, 123, 127, 138, 130, 132, 143, 130, 133, 145, 132, 136, 144, 135, 141, 149, 139, 138, 147, 137, 137, 146, 136, 140, 149, 134, 143, 152, 138, 148, 157, 142, 148, 157, 142, 150, 160, 143, 151, 161, 144, 152, 159, 143, 153, 160, 144, 158, 162, 149, 157, 161, 148, 162, 163, 154, 161, 162, 153, 157, 168, 153, 154, 166, 151, 157, 167, 150, 164, 174, 157, 170, 179, 155, 173, 181, 158, 181, 188, 161, 189, 196, 169, 208, 210, 180, 222, 224, 194, 235, 236, 203, 242, 242, 210, 252, 249, 221, 252, 249, 221, 248, 246, 217, 248, 246, 217, 253, 251, 222, 249, 247, 218, 250, 248, 221, 250, 248, 221, 252, 248, 227, 253, 249, 228, 249, 247, 229, 250, 248, 231, 251, 251, 237, 252, 252, 238, 253, 253, 241, 252, 251, 240, 250, 252, 242, 250, 252, 242, 251, 253, 243, 253, 254, 245, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 253, 249, 253, 254, 247, 253, 254, 247, 253, 254, 247, 253, 254, 247, 253, 254, 247, 253, 254, 247, 253, 254, 245, 253, 254, 245, 253, 254, 245, 253, 254, 245, 253, 254, 245, 253, 254, 245, 253, 255, 243, 253, 255, 243, 249, 251, 239, 249, 251, 239, 250, 252, 240, 250, 252, 240, 250, 252, 240, 251, 253, 241, 251, 253, 241, 251, 253, 241, 251, 253, 241, 251, 253, 241, 251, 253, 241, 251, 253, 241, 253, 253, 239
+};
+const unsigned int ninetyfive_percent[] PROGMEM = {
+  0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242
+};
+const unsigned int ninetynine_percent[] PROGMEM = {
+  0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252
+};
+
+const unsigned int nineninefive[] PROGMEM = {
+  0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253
 };
 
 double frameMillis;
@@ -67,11 +79,12 @@ int showLength=2000;
 int showFrame=0;
 int enablePin=7;
 bool resetFlag=false;
-
-//float rippleBuffer1[LIGHT_COUNT][3], 
-//			rippleBuffer2[LIGHT_COUNT][3], 
+uint32_t flurryColor[FLURRY_COUNT];
+float flurryCoeff[FLURRY_COUNT][4];
+//float rippleBuffer1[240][3], 
+//			rippleBuffer2[240][3], 
 //			rippleBufferSwap[3];
-//float accumBuffer[LIGHT_COUNT][3];
+//float accumBuffer[240][3];
 
 void setup() {
 	phaseAlpha=(twoPi)/strip.numPixels();
@@ -79,8 +92,10 @@ void setup() {
 	currentShow= 6;
 	//pinMode(digSoundPin, OUTPUT);   // sets the pin as output
 	pinMode(enablePin, INPUT_PULLUP);
+ pinMode(3,OUTPUT);
 	strip.begin();
 	strip.show(); // Initialize all pixels to 'off'
+ flurryInit();
 }
 
 void loop() {
@@ -96,18 +111,22 @@ void loop() {
     incrementR+=.0100*speedcoeff*speedphase*frameMillis/5;
     incrementG+=.0103*speedcoeff*speedphase*frameMillis/5;
     incrementB+=.0107*speedcoeff*speedphase*frameMillis/5;
-
-	strip.clearPixels(); //resets the pixel buffer to black
+if((thisMillis/500)%2==1) 
+{digitalWrite(3,HIGH);}
+else
+{digitalWrite(3,LOW);};
+	//strip.clearPixels(); //resets the pixel buffer to black
 	if (digitalRead(enablePin)) {
 		if(resetFlag){
 			currentShow++;
+      flurryInit();
     		currentShow=currentShow%numShows;
 			resetFlag=false;
 		}
   switch (currentShow) {
   //switch (07) {
-    //case 0:
-      //blue "water"
+//    case 0:
+//      //blue "water"
 //      ripple(192,.975, 5, 
 //              1.0, 0,
 //              1.5, 32,
@@ -118,8 +137,8 @@ void loop() {
       sinePulser();
       break;
 //    case 2:
-      //red "fire"
-             
+//      //red "fire"
+//             
 //      ripple(128,.99, 1, 
 //              5.0, 48,
 //              1.5, 0,
@@ -127,9 +146,9 @@ void loop() {
 //
 //      break;
 //    case 3:
-      //movPlayer(0);
-      //purple maybe?
-             
+//      
+//      //purple maybe?
+//             
 //      ripple(128,.8979, 10, 
 //              6.0, 0,
 //              2, -96,
@@ -139,7 +158,7 @@ void loop() {
 ////
 //      break;
 //    case 4:
-//      //green "uh something green"
+////      //green "uh something green"
 //      ripple(192,.99, 1,
 //              2.5, 0,
 //              5, 48,
@@ -161,20 +180,14 @@ void loop() {
 //              1, 0,
 //              1, 0,
 //              1, 0);
+strip.clearPixels(); //resets the pixel buffer to black
 frameRateGauge();
       break;
 
-    //case 7:
-      //electricity bursts
-			//uint8_t width, float prob,
-			//uint8_t R,     uint8_t G,     uint8_t B,
-			//float   Rdecay, float  Gdecay, float Bdecay)
-//			bursts(7,  20,
-//						255,  255,  255,
-//						.82,  .83,  .85);
-						
-						
-	//					break;
+    case 7:
+    flurry();					
+    frameRateGauge();
+		break;
 
     case 8:
       //movie
@@ -191,12 +204,15 @@ frameRateGauge();
             break;
 
     default:
-      chase(25);
+      flurry();
 
       break;
   }
-  frameRateGauge();
-  } else {resetFlag=true;}
+  //frameRateGauge();
+  } else {
+    strip.clearPixels(); //resets the pixel buffer to black
+    resetFlag=true;
+    }
   //frameRateGauge();
   strip.show();
 
@@ -210,7 +226,41 @@ frameRateGauge();
 //  rainbow(30);
 
 }
+void flurryInit() {
+  int i,j, colorBase;
+  colorBase=random(255);
+  for(i=0; i<FLURRY_COUNT;i++){
+    flurryColor[i]=Wheel(colorBase+random(-30,30));
+    flurryCoeff[i][0]=random(628)/100;
+    for(j=1;j<4;j++){
+      flurryCoeff[i][j]=random(1000)/1000.0;
+      }
+    }
+    flurryColor[FLURRY_COUNT-1]=Wheel(colorBase-128);
+  }
 
+  void flurry() {
+    fade(0.95);
+    float pos;
+    int i;
+    long j;
+    int wid=LIGHT_COUNT/200;
+    for(i=0; i<FLURRY_COUNT;i++){
+      pos=
+      (
+        (
+          sin(flurryCoeff[i][0]+flurryCoeff[i][1]*incrementR)
+         +sin(flurryCoeff[i][0]+flurryCoeff[i][2]*incrementR)
+         +sin(flurryCoeff[i][0]+flurryCoeff[i][3]*incrementR)
+         )
+         /3+1)/2*LIGHT_COUNT;
+
+      for(j=pos-wid;j<pos+wid;j++){
+        strip.addPixelColor(j,flurryColor[i]);
+        }
+      }
+      //delay(10);
+    }
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
@@ -263,7 +313,8 @@ void rainbowCycle(uint8_t wait) {
 
   //for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()*1) + showFrame) & 255));
+//      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()*1) + showFrame) % 256));
+      strip.setPixelColor(i, Wheel((i+ showFrame) % 256));
       //      strip.setPixelColor(i, (i==j)*255);
     }
     //strip.show();
@@ -357,9 +408,11 @@ void cloudSlider(uint8_t wait) {
 //  rippleBuffer2[strip.numPixels()][1]=0;
 //  rippleBuffer2[strip.numPixels()][2]=0;
 //  for (int j=0;j<strip.numPixels();j++) {
-//    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
+//    for(int l=0;l<4;l++){
+//    strip.setPixelColor(j+(j*240), strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
 //                                       clamp(rippleBuffer2[j][1]*mulG+offG),
 //                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
+//    }
 //   for (int k=0; k<3;k++) {                                    
 //   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
 //   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
@@ -402,9 +455,11 @@ void cloudSlider(uint8_t wait) {
 //  rippleBuffer2[strip.numPixels()][1]=0;
 //  rippleBuffer2[strip.numPixels()][2]=0;
 //  for (int j=0;j<strip.numPixels();j++) {
-//    strip.setPixelColor(j, strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
+//    for(int l=0;l<4;l++){
+//    strip.setPixelColor(j+(j*240), strip.Color(clamp(rippleBuffer2[j][0]*mulR+offR),
 //                                       clamp(rippleBuffer2[j][1]*mulG+offG),
 //                                       clamp(rippleBuffer2[j][2]*mulB+offB)));
+//    }
 //   for (int k=0; k<3;k++) {                                    
 //   rippleBufferSwap[k]=rippleBuffer2[j][k];                                    
 //   rippleBuffer2[j][k]=rippleBuffer1[j][k];                                    
@@ -433,19 +488,19 @@ void movPlayer(uint8_t wait) {
       r=pgm_read_byte_near(movie+coord+0);
       g=pgm_read_byte_near(movie+coord+1);
       b=pgm_read_byte_near(movie+coord+2);
-      r1=pgm_read_byte_near(movie+(coord1+0));
-      g1=pgm_read_byte_near(movie+(coord1+1));
-      b1=pgm_read_byte_near(movie+(coord1+2));
-      ratio=movieFrame-floor(movieFrame);
-//      r=(r*(1-ratio)+r1*(ratio))*5-800;
-//      g=(g*(1-ratio)+g1*(ratio))*5-800;
-//      b=(b*(1-ratio)+b1*(ratio))*5-800;
-      r=(r*(1-ratio)+r1*(ratio));
-      g=(g*(1-ratio)+g1*(ratio));
-      b=(b*(1-ratio)+b1*(ratio));
-      r=min(max(r,0),255);
-      g=min(max(g,0),255);
-      b=min(max(b,0),255);
+//      r1=pgm_read_byte_near(movie+(coord1+0));
+//      g1=pgm_read_byte_near(movie+(coord1+1));
+//      b1=pgm_read_byte_near(movie+(coord1+2));
+//      ratio=movieFrame-floor(movieFrame);
+////      r=(r*(1-ratio)+r1*(ratio))*5-800;
+////      g=(g*(1-ratio)+g1*(ratio))*5-800;
+////      b=(b*(1-ratio)+b1*(ratio))*5-800;
+//      r=(r*(1-ratio)+r1*(ratio));
+//      g=(g*(1-ratio)+g1*(ratio));
+//      b=(b*(1-ratio)+b1*(ratio));
+//      r=min(max(r,0),255);
+//      g=min(max(g,0),255);
+//      b=min(max(b,0),255);
     strip.setPixelColor(h,strip.Color(r,g,b));
     }
 //    strip.setPixelColor(movieFrame,strip.Color(255,255,255));
@@ -473,10 +528,10 @@ void sinePulser() {
     //for (int lupe=0;lupe<1000;lupe++) {
     for (int h = 0;h<strip.numPixels();h++) {
 
-      strip.setPixelColor(h,strip.Color(
+      strip.setPixelColor(h,
       (max(sin(flangephase*(incrementR+h*phaseAlpha)),0))*255 ,
       (max(sin(flangephase*(incrementG+h*phaseAlpha)),0))*255,
-      (max(sin(flangephase*(incrementB+h*phaseAlpha)),0))*255)
+      (max(sin(flangephase*(incrementB+h*phaseAlpha)),0))*255
         );
       //   strip.setPixelColor(h,strip.Color(255,255,255));
     }
@@ -501,7 +556,26 @@ void sinePulser() {
 //    strip.show();
     //}
   }
+void fade(float fadeCoeff) {
+  uint32_t pixColor;
+  uint8_t r,  g,  b;
+  
+  for (int h = 0;h<strip.numPixels();h++) {
+      pixColor =strip.getPixelColor(h);
+      r=pixColor  >>16;
+      g=pixColor  >> 8 & 0xff;
+      b=pixColor & 0x000000ff;
+      strip.setPixelColor(h,
+        pgm_read_byte_near(ninetyfive_percent+r),
+        pgm_read_byte_near(ninetyfive_percent+g),
+        pgm_read_byte_near(ninetyfive_percent+b)
+//        pgm_read_byte_near(ninetynine_percent+r),
+//        pgm_read_byte_near(ninetynine_percent+g),
+//        pgm_read_byte_near(ninetynine_percent+b)
+        );
 
+    }
+  }
 float clamp(float x) {
   return min(max(x,0),255);
 }
