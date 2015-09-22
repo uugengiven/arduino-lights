@@ -14,7 +14,7 @@
 //   NEO_GRB     Pixels are wired for GRB bitstream
 //   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)
 //   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, 4, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, 2, NEO_GRB + NEO_KHZ800);
 //flowerpan
 //frames--100
 //rgb, 108 pixels
@@ -76,7 +76,7 @@ int offset, offset1;
 int currentShow=0;
 int numShows=10;
 int showLength=2000;
-int showFrame=0;
+uint16_t showFrame=0;
 int enablePin=7;
 bool resetFlag=false;
 uint32_t flurryColor[FLURRY_COUNT];
@@ -89,7 +89,7 @@ float flurryCoeff[FLURRY_COUNT][4];
 void setup() {
 	phaseAlpha=(twoPi)/strip.numPixels();
 	randomSeed(seedOut(32));  // read from an analog port with nothing connected
-	currentShow= 6;
+	currentShow= 0;
 	//pinMode(digSoundPin, OUTPUT);   // sets the pin as output
 	pinMode(enablePin, INPUT_PULLUP);
  pinMode(3,OUTPUT);
@@ -125,14 +125,16 @@ else
 		}
   switch (currentShow) {
   //switch (07) {
-//    case 0:
+    case 0:
 //      //blue "water"
 //      ripple(192,.975, 5, 
 //              1.0, 0,
 //              1.5, 32,
 //              5.0, 96);
 //
-//      break;
+      radarWipe(240);
+//      frameRateGauge();
+      break;
     case 1:
       sinePulser();
       break;
@@ -226,6 +228,34 @@ frameRateGauge();
 //  rainbow(30);
 
 }
+void radarWipe(int pixelspacing) {
+//frameRateGauge();
+  fade(0.99);
+      int pos=
+      (
+        (
+          sin(flurryCoeff[0][0]+flurryCoeff[0][1]*incrementR)
+         +sin(flurryCoeff[0][0]+flurryCoeff[0][2]*incrementR)
+         )
+         /2+1)/2*LIGHT_COUNT;
+
+  int offset=showFrame*2 % pixelspacing;
+//strip.setPixelColor(offset, strip.Color(0,pgm_read_byte_near(cloudstrip1+offset*3),0));
+  for(int i=offset; i<LIGHT_COUNT; i=i+pixelspacing) {
+    
+    strip.setPixelColor(i, strip.Color(clamp(64-abs(i-pos)*2+30),
+                                       pgm_read_byte_near(cloudstrip1+i*3),
+                                       clamp(64-abs(i-pos)*2+30)
+                                       )
+                       );
+   strip.setPixelColor(i+1, strip.Color(clamp(64-abs(i+1-pos)*2+30),
+                                       pgm_read_byte_near(cloudstrip1+(i+1)*3),
+                                       clamp(64-abs(i+1-pos)*2+30)
+                                       )
+                       );
+    }
+  }
+  
 void flurryInit() {
   int i,j, colorBase;
   colorBase=random(255);
@@ -559,12 +589,13 @@ void sinePulser() {
 void fade(float fadeCoeff) {
   uint32_t pixColor;
   uint8_t r,  g,  b;
-  
+  if (fadeCoeff==0.95){
   for (int h = 0;h<strip.numPixels();h++) {
       pixColor =strip.getPixelColor(h);
       r=pixColor  >>16;
       g=pixColor  >> 8 & 0xff;
       b=pixColor & 0x000000ff;
+
       strip.setPixelColor(h,
         pgm_read_byte_near(ninetyfive_percent+r),
         pgm_read_byte_near(ninetyfive_percent+g),
@@ -575,6 +606,37 @@ void fade(float fadeCoeff) {
         );
 
     }
+  } else if(fadeCoeff==0.99) {
+   for (int h = 0;h<strip.numPixels();h++) {
+      pixColor =strip.getPixelColor(h);
+      r=pixColor  >>16;
+      g=pixColor  >> 8 & 0xff;
+      b=pixColor & 0x000000ff;
+
+      strip.setPixelColor(h,
+        pgm_read_byte_near(ninetynine_percent+r),
+        pgm_read_byte_near(ninetynine_percent+g),
+        pgm_read_byte_near(ninetynine_percent+b)
+        );
+
+    }
+   
+    }else {
+     for (int h = 0;h<strip.numPixels();h++) {
+      pixColor =strip.getPixelColor(h);
+      r=pixColor  >>16;
+      g=pixColor  >> 8 & 0xff;
+      b=pixColor & 0x000000ff;
+
+      strip.setPixelColor(h,
+        pgm_read_byte_near(nineninefive+r),
+        pgm_read_byte_near(nineninefive+g),
+        pgm_read_byte_near(nineninefive+b)
+        );
+
+    }
+
+      }
   }
 float clamp(float x) {
   return min(max(x,0),255);
