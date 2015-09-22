@@ -14,7 +14,10 @@
 //   NEO_GRB     Pixels are wired for GRB bitstream
 //   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)
 //   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, 2, NEO_GRB + NEO_KHZ800);
+
+int dataPin=4;//+++++++++++++++++++++++the light strip data pin
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, dataPin, NEO_GRB + NEO_KHZ800);
+
 //flowerpan
 //frames--100
 //rgb, 108 pixels
@@ -78,6 +81,7 @@ int numShows=10;
 int showLength=2000;
 uint16_t showFrame=0;
 int enablePin=7;
+
 bool resetFlag=false;
 uint32_t flurryColor[FLURRY_COUNT];
 float flurryCoeff[FLURRY_COUNT][4];
