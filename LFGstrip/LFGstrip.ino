@@ -5,7 +5,7 @@
 //#define LIGHT_COUNT (108)
 #define LIGHT_COUNT (960)
 
-#define FLURRY_COUNT (10)
+#define FLURRY_COUNT (15)
 //#include "flowerpan.h"
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -287,7 +287,7 @@ void flurryInit() {
          +sin(flurryCoeff[i][0]+flurryCoeff[i][2]*incrementR)
          +sin(flurryCoeff[i][0]+flurryCoeff[i][3]*incrementR)
          )
-         /3+1)/2*LIGHT_COUNT;
+         /3+.75)*LIGHT_COUNT;
 
       for(j=pos-wid;j<pos+wid;j++){
         strip.addPixelColor(j,flurryColor[i]);
