@@ -4,6 +4,8 @@
 
 //#define LIGHT_COUNT (108)
 #define LIGHT_COUNT (960)
+int dataPin=4;//+++++++++++++++++++++++the light strip data pin
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, dataPin, NEO_GRB + NEO_KHZ800);
 
 #define FLURRY_COUNT (15)
 //#include "flowerpan.h"
@@ -15,8 +17,6 @@
 //   NEO_KHZ400  400 KHz bitstream (e.g. FLORA pixels)
 //   NEO_KHZ800  800 KHz bitstream (e.g. High Density LED strip)
 
-int dataPin=4;//+++++++++++++++++++++++the light strip data pin
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LIGHT_COUNT, dataPin, NEO_GRB + NEO_KHZ800);
 
 //flowerpan
 //frames--100
@@ -93,7 +93,7 @@ float flurryCoeff[FLURRY_COUNT][4];
 void setup() {
 	phaseAlpha=(twoPi)/strip.numPixels();
 	randomSeed(seedOut(32));  // read from an analog port with nothing connected
-	currentShow= 0;
+	currentShow= random(numShows);
 	//pinMode(digSoundPin, OUTPUT);   // sets the pin as output
 	pinMode(enablePin, INPUT_PULLUP);
  pinMode(3,OUTPUT);
@@ -174,7 +174,7 @@ else
       rainbowCycle(1);
 
       break;
-    case 6:
+//    case 6:
       //electricity 
       //uint8_t brite,
       //float decay, float prob,
@@ -186,13 +186,13 @@ else
 //              1, 0,
 //              1, 0,
 //              1, 0);
-strip.clearPixels(); //resets the pixel buffer to black
-frameRateGauge();
-      break;
+//strip.clearPixels(); //resets the pixel buffer to black
+//frameRateGauge();
+//      break;
 
     case 7:
     flurry();					
-    frameRateGauge();
+    //frameRateGauge();
 		break;
 
     case 8:
